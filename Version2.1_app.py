@@ -140,13 +140,19 @@ store = st.radio(
     ]
 )
 
-uploaded_file = st.file_uploader(
-    "予測ファイル(xlsx)",
-    type=["xlsx"]
-)
+if store == "ニラク":
+    file_url = (
+        "https://raw.githubusercontent.com/"
+        "Yuki061563-debug/juggler-assistant/main/"
+        "latest_niraku.xlsx"
+    )
 
-if uploaded_file is None:
-    st.stop()
+else:
+    file_url = (
+        "https://raw.githubusercontent.com/"
+        "Yuki061563-debug/juggler-assistant/main/"
+        "latest_maruhan.xlsx"
+    )
 
 # ==================================================
 # ニラク
@@ -155,12 +161,12 @@ if uploaded_file is None:
 if store == "ニラク":
 
     ai_df = pd.read_excel(
-        uploaded_file,
+        file_url,
         sheet_name="AI＋人間"
     )
 
     human_df = pd.read_excel(
-        uploaded_file,
+        file_url,
         sheet_name="人間予想ランキング"
     )
 
@@ -196,7 +202,7 @@ if store == "ニラク":
 else:
 
     rank_df = pd.read_excel(
-        uploaded_file,
+        file_url,
         sheet_name="ランキング"
     )
 
